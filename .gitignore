@@ -65,6 +65,7 @@ jrebel.lic
 *.iws
 .*.sw?
 .idea
+.kotlintest
 
 # paulp script
 /.lib/
