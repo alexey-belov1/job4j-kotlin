@@ -5,10 +5,10 @@ fun draw(size: Int): Boolean {
         print("Wrong input")
         return false
     }
-    for(row in 0 until size) {
-        for(column in 0 until size) {
+    for (row in 0 until size) {
+        for (column in 0 until size) {
             print(
-                    if (row == column || row == size - 1 - column) "x" else " "
+                if (row == column || row == size - 1 - column) "x" else " "
             )
         }
         println();
