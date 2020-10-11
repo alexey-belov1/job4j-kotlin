@@ -1,6 +1,6 @@
 package ru.job4j.tracker
 
-interface ITracker {
+internal interface ITracker {
     fun add(item : Item) : Item
 
     fun replace(id : String, item : Item) : Boolean

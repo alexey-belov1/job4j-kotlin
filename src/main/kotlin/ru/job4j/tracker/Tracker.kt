@@ -3,7 +3,7 @@ package ru.job4j.tracker
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Tracker : ITracker {
+internal class Tracker : ITracker {
 
     private val items = ArrayList<Item>()
 
