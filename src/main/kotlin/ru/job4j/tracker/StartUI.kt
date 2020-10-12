@@ -14,10 +14,11 @@ internal class StartUI {
                         + "1. Show all items" + "\n"
                         + "2. Exit Program"
             )
-            when (input.askInt("Select: ")) {
-                0 -> run = createAction(input, tracker)
-                1 -> run = showAction(tracker)
-                2 -> run = exitAction()
+            run = when (input.askInt("Select: ")) {
+                0 -> createAction(input, tracker)
+                1 -> showAction(tracker)
+                2 -> exitAction()
+                else -> true
             }
         }
     }
