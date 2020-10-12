@@ -14,7 +14,7 @@ internal class Tracker : ITracker {
     }
 
     override fun replace(id : String, item : Item) : Boolean {
-        items.singleOrNull { it.id == id }?.apply {
+        items.find { it.id == id }?.apply {
             name = item.name
             return true
         }
