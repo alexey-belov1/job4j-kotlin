@@ -1,45 +1,32 @@
 package ru.job4j.tracker
 
+import java.util.*
+
 internal class StartUI {
 
     private val input = ConsoleInput()
     private val tracker = Tracker()
 
     fun init() {
+        val actions = ArrayList<Action>()
+        actions.add(CreateAction())
+        actions.add(ShowAction())
+        actions.add(ExitAction())
+
         var run = true
         while (run) {
-            println(
-                "Menu." + "\n"
-                        + "0. Add new Item" + "\n"
-                        + "1. Show all items" + "\n"
-                        + "2. Exit Program"
-            )
-            run = when (input.askInt("Select: ")) {
-                0 -> createAction(input, tracker)
-                1 -> showAction(tracker)
-                2 -> exitAction()
-                else -> true
-            }
+            showMenu(actions)
+            val select = input.askInt("Select: ")
+            val action = actions[select]
+            run = action.execute(input, tracker)
         }
     }
 
-    companion object {
-        fun createAction(input : Input, tracker : ITracker) : Boolean {
-            val name = input.askStr("Enter name: ")
-            val item = Item(name = name)
-            tracker.add(item)
-            return true
+    private fun showMenu(actions : ArrayList<Action>) {
+        println("Menu.")
+        for (index in actions.indices) {
+            println(index.toString() + ". " + actions[index].name())
         }
-
-        fun showAction(tracker : ITracker) : Boolean {
-            val items = tracker.findAll()
-            for ((id, name) in items) {
-                println("$name $id")
-            }
-            return true
-        }
-
-        fun exitAction() : Boolean = false
     }
 }
 
