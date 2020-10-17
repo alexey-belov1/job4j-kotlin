@@ -7,17 +7,18 @@ class BankService {
         users.putIfAbsent(user, ArrayList())
     }
 
-    fun findByRequisite(passport : String, requisite : String) : Account? {
-        val user = findByPassport(passport)
-        return users[user]?.find { it -> it.requisite == requisite }
-    }
+    fun findByRequisite(passport : String, requisite : String) : Account? =
+        findByPassport(passport)?.let { user ->
+            users[user]?.find { it.requisite == requisite }
+        }
 
     fun addAccount(passport : String, account : Account) {
-        val user = findByPassport(passport)
-        users[user]?.add(account)
+        findByPassport(passport)?.let { user ->
+            users[user]?.add(account)
+        }
     }
 
-    fun findByPassport(passport : String) = users.keys.find { it.passport == passport }
+    fun findByPassport(passport : String) : User? = users.keys.find { it.passport == passport }
 
 
     fun transferMoney(
