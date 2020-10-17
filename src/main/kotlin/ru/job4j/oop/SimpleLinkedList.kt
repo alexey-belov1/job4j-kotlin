@@ -1,5 +1,6 @@
 package ru.job4j.oop
 
+import java.lang.Integer.min
 import java.util.*
 
 class SimpleLinkedList<T> : Iterable<T> {
@@ -72,6 +73,48 @@ class SimpleLinkedList<T> : Iterable<T> {
                 throw NoSuchElementException()
             }
             return get(indexIt++)
+        }
+
+    }
+
+    fun listIterator() : ListIterator<T> {
+        return BiLinkedIt()
+    }
+
+    inner class BiLinkedIt : ListIterator<T> {
+        private var indexIt = 0
+        private val modCountIt = modCount
+
+        override fun hasNext() = indexIt != size
+
+        override fun next() : T {
+            checkModification()
+
+            if (!hasNext()) {
+                throw NoSuchElementException()
+            }
+            return get(indexIt++)
+        }
+
+        override fun nextIndex() = indexIt
+
+        override fun hasPrevious() = indexIt > 0
+
+        override fun previous() : T {
+            checkModification()
+
+            if (!hasPrevious()) {
+                throw NoSuchElementException()
+            }
+            return get(min(indexIt--, size - 1))
+        }
+
+        override fun previousIndex() = indexIt - 1
+
+        private fun checkModification() {
+            if (modCountIt != modCount) {
+                throw ConcurrentModificationException()
+            }
         }
 
     }
