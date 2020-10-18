@@ -1,0 +1,12 @@
+[
+	{
+		"name":"Ekaterinburg",
+		"region":"Sverdlovsk region", 
+		"population":1493749
+	},
+	{
+		"name":"Moscow",
+		"region":"Moscow region",
+		"population":12678079
+	}
+]

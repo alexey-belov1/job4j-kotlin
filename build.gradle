@@ -30,6 +30,7 @@ test {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
     testImplementation 'io.kotlintest:kotlintest-runner-junit5:3.3.2'
 }
 
