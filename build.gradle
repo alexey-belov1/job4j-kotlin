@@ -31,6 +31,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
+    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
     testImplementation 'io.kotlintest:kotlintest-runner-junit5:3.3.2'
 }
 
