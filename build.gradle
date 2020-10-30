@@ -1,6 +1,7 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.72'
     id 'jacoco'
+    id 'org.liquibase.gradle' version '2.0.4'
 }
 
 group 'ru.job4j'
@@ -33,8 +34,43 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
     compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
     compile 'org.junit.jupiter:junit-jupiter:5.7.0'
+    liquibaseRuntime 'org.liquibase:liquibase-core:3.8.0'
+    liquibaseRuntime 'org.postgresql:postgresql:42.2.5'
     testImplementation 'io.kotlintest:kotlintest-runner-junit5:3.3.2'
 }
+
+liquibase {
+
+    def changeLogFileValue = 'db/master.xml'
+    def urlValue = 'jdbc:postgresql://127.0.0.1:5432/kt'
+    def driverValue = 'org.postgresql.Driver'
+    def usernameValue = 'postgres'
+    def passwordValue = 'password'
+
+    activities {
+        prod {
+            changeLogFile changeLogFileValue
+            url urlValue
+            driver driverValue
+            username usernameValue
+            password passwordValue
+        }
+
+        travis {
+            changeLogFile changeLogFileValue
+            url urlValue
+            driver driverValue
+            username usernameValue
+            password ''
+        }
+    }
+
+    def osName = System.getProperty("os.name").toLowerCase()
+    runList = (osName.contains("windows")) ? 'prod' : 'travis'
+}
+
+update.dependsOn(testClasses)
+test.dependsOn(update)
 
 compileKotlin {
     kotlinOptions.jvmTarget = "13"

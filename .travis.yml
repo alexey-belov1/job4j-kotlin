@@ -4,7 +4,11 @@ language: java
 jdk:
   - openjdk13
 
+services:
+  - postgresql
+
 before_install:
+  - psql -c 'create database kt;' -U postgres
   - chmod +x gradlew
 
 # используем режим обычного пользователя для сборки проекта.
