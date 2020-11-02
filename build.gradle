@@ -39,6 +39,7 @@ dependencies {
     liquibaseRuntime 'org.liquibase:liquibase-core:3.8.0'
     liquibaseRuntime 'org.postgresql:postgresql:42.2.5'
     testImplementation 'io.kotlintest:kotlintest-runner-junit5:3.3.2'
+    testCompile group: 'io.mockk', name: 'mockk', version: '1.10.2'
 }
 
 liquibase {
